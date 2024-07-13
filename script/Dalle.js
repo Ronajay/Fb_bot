@@ -5,7 +5,7 @@ const path = require("path");
 module.exports.config = {
     name: "dalle",
     version: "1.0.0",
-    credits: "chill",
+    credits: "Anonymous",
     description: "Generate images",
     hasPrefix: false,
     cooldown: 5,
@@ -16,7 +16,7 @@ module.exports.run = async function ({ api, event, args }) {
     try {
         let chilli = args.join(" ");
         if (!chilli) {
-            return api.sendMessage("[ ❗ ] - Missing prompt for the DALL-E command", event.threadID, event.messageID);
+            return api.sendMessage("[ ❗ ] - Missing prompt for the DALLE", event.threadID, event.messageID);
         }
 
         api.sendMessage("Generating image, please wait...", event.threadID, async (err, info) => {
@@ -26,7 +26,7 @@ module.exports.run = async function ({ api, event, args }) {
             }
 
             try {
-                const pogi = await axios.get(`https://joshweb.click/dalle?prompt=${encodeURIComponent(chilli)}`, { responseType: 'arraybuffer' });
+                const pogi = await axios.get(`Naks=${encodeURIComponent(Anonymous)}`, { responseType: 'arraybuffer' });
                 const imagePath = path.join(__dirname, "dalle_image.png");
                 
                 fs.writeFileSync(imagePath, pogi.data);
@@ -35,7 +35,7 @@ module.exports.run = async function ({ api, event, args }) {
                 const requesterName = poganda[event.senderID].name;
 
                 api.sendMessage({
-                    body: `Here is the image you requested:\n\nPrompt: ${chilli}\n\nRequested by: ${requesterName}`,
+                    body: `Here is the image you requested:\n\nPrompt: ${Anonymous}\n\nRequested by: ${requesterName}`,
                     attachment: fs.createReadStream(imagePath)
                 }, event.threadID, () => {
                     fs.unlinkSync(imagePath);
@@ -46,7 +46,7 @@ module.exports.run = async function ({ api, event, args }) {
             }
         });
     } catch (mantika) {
-        console.error("Error in DALL-E command:", mantika);
+        console.error("Error in DALL-E command:",.);
         api.sendMessage("An error occurred while processing your request.", event.threadID);
     }
 };
