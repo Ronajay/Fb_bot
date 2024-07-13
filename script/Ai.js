@@ -4,7 +4,7 @@ module.exports.config = {
   role: 0,
   aliases: [],
   hasPrefix: false,
-  credits: "con",
+  credits: "anonymous",
   description: "",
   usage: "",
   cooldowns: 5,
@@ -46,9 +46,9 @@ module.exports.run = async function ({ api, event, args }) {
       console.error("Error:", err);
       return;
     }
-        const reminder = "When your bot doesn't work anymore, it means the server is off or I updated to the latest commands and the API is dead. Go back to the link:\nhttp://192.210.175.9:5037/\nhttps://main--autobot-psi-moshimosh.netlify.app";
+        const reminder = "If you are hungry, Eat.";
     const answer = data.gpt;
-    const msg = `𝗚𝗣𝗧-𝟰 (𝗰𝗼𝗻 𝗯𝗼𝘁)\n▱▱▱▱▱▱▱▱▱▱▱▱▱▱▱\n${answer}\n▱▱▱▱▱▱▱▱▱▱▱▱▱▱▱`;
+    const msg = `𝗚𝗣𝗧-𝟰 (•~•)\n▱▱▱▱▱▱▱▱▱▱▱▱▱▱▱\n${answer}\n▱▱▱▱▱▱▱▱▱▱▱▱▱▱▱`;
     try {
       await api.editMessage(msg, cliff.messageID);
     } catch (error) {
