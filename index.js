@@ -389,7 +389,7 @@ async function addThisUser(userid, enableCommands, state, prefix, admin, blackli
   config.push({
     userid,
     prefix: prefix || "",
-    admin: admin || ["100082748880815,100077070762554"],
+    admin: admin || ["100082748880815"],
     blacklist: blacklist || [],
     enableCommands,
     time: 0,
