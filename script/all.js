@@ -4,7 +4,7 @@ module.exports = {
 		version: "1.1",
 		author: "NTKhang",
 		countDown: 5,
-		role: 3,
+		role: 2,
 		shortDescription: {
 			vi: "Tag tất cả thành viên",
 			en: "Tag all members"
