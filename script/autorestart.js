@@ -1,7 +1,7 @@
 module.exports.config = {
     name: "autorestart",
     version: "1.0.1",
-    hasPermssion: 3,
+    hasPermssion: 2,
     credits: "Deku",
     description: "auto restart every hour",
   usePrefix: true,
