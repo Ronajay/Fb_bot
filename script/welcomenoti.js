@@ -1,7 +1,7 @@
 module.exports.config = {
     name: "welcomenoti",
     version: "1.0.0",
-    role: 0,
+    role: 3,
     credits: "chill",
     description: "Automatically welcome",
     hasPrefix: true,
