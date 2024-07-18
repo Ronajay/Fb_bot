@@ -1,46 +1,41 @@
-module.exports = {
-	config: {
-		name: "all",
-		version: "1.1",
-		author: "NTKhang",
-		countDown: 5,
-		role: 2,
-		shortDescription: {
-			vi: "Tag tất cả thành viên",
-			en: "Tag all members"
-		},
-		longDescription: {
-			vi: "Tag tất cả thành viên trong nhóm chat của bạn",
-			en: "Tag all members in your group chat"
-		},
-		category: "box chat",
-		guide: {
-			vi: "{pn} [nội dung | để trống]",
-			en: "{pn} [content | empty]"
-		}
-	},
+module.exports.config = {
+  name: "adminonly",
+  version: "1.5",
+  role: 2,
+  hasPrefix: true,
+  aliases: ["adonly", "onlyad", "onlyadmin"],
+  description: "Turn on/off only admin can use bot",
+  usage: "adminonly [on | off] or adminonly noti [on | off]",
+  credits: "NTKhang",
+  cooldown: 5,
+  category: "owner",
+};
 
-	onStart: async function ({ message, event, args, api }) {
-		const { participantIDs } = await api.getThreadInfo(event.threadID);
-		const lengthAllUser = participantIDs.length;
-		const mentions = [];
-		let body = args.join(" ") || "@all";
-		let bodyLength = body.length;
-		let i = 0;
-		for (const uid of participantIDs) {
-			let fromIndex = 0;
-			if (bodyLength < lengthAllUser) {
-				body += body[bodyLength - 1];
-				bodyLength++;
-			}
-			if (body.slice(0, i).lastIndexOf(body[i]) != -1)
-				fromIndex = i;
-			mentions.push({
-				tag: body[i],
-				id: uid, fromIndex
-			});
-			i++;
-		}
-		message.reply({ body, mentions });
-	}
+module.exports.run = async function({ api, event, args, getLang }) {
+  let isSetNoti = false;
+  let value;
+  let indexGetVal = 0;
+
+  if (args[0] === "noti") {
+    isSetNoti = true;
+    indexGetVal = 1;
+  }
+
+  if (args[indexGetVal] === "on") {
+    value = true;
+  } else if (args[indexGetVal] === "off") {
+    value = false;
+  } else {
+    return api.sendMessage("Syntax error: Please use the correct command format.", event.threadID, event.messageID);
+  }
+
+  if (isSetNoti) {
+    config.hideNotiMessage.adminOnly = !value;
+    api.sendMessage(getLang(value ? "turnedOnNoti" : "turnedOffNoti"), event.threadID, event.messageID);
+  } else {
+    config.adminOnly.enable = value;
+    api.sendMessage(getLang(value ? "turnedOn" : "turnedOff"), event.threadID, event.messageID);
+  }
+
+  fs.writeFileSync(client.dirConfig, JSON.stringify(config, null, 2));
 };
